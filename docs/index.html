@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Convert Scala scales and keyboard maps to SunVox pitch curves">
+  <title>Scala to SunVox</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <header>
+    <h1>Scala to SunVox</h1>
+  </header>
+
+  <main>
+
+    <section>
+      <label for="sclInput">Select .scl:</label>
+      <input type="file" id="sclInput" accept=".scl">
+    </section>
+
+    <section>
+      <label for="kbmInput">Select .kbm (optional):</label>
+      <input type="file" id="kbmInput" accept=".kbm">
+    </section>
+
+    <section>
+      <div id="options">
+        <button id="convertButton">Convert to .curve16bit</button>
+      </div>
+      <p id="messageArea"></p>
+    </section>
+
+    <section>
+      <p>
+        This website converts
+        <a href="https://www.huygens-fokker.org/scala/">Scala</a> scales and
+        keyboard maps to <a href="https://warmplace.ru/soft/sunvox/">SunVox</a>
+        pitch curves.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <a href="https://github.com/jangler/scala-to-sunvox">GitHub</a>
+  </footer>
+
+</body>
+
+</html>
