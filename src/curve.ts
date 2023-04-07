@@ -25,16 +25,27 @@ function generateCurve(scale: Scale, keymap: Keymap): Uint8Array {
     return buf;
 }
 
+function modulo(x: number, y: number): number {
+    let n = x % y;
+    while (n < 0) {
+        n += y;
+    }
+    return n;
+}
+
 function calcPitch(scale: Scale, keymap: Keymap, key: number): number {
+    // sorry for all the increment/decrement nonsense
     const offset = key - 1 - keymap.middleNote;
     const octave = Math.floor(offset / keymap.size);
-    let index = offset % keymap.size;
-    while (index < 0) {
-        index += keymap.size;
-    }
-    const units = C5_UNITS + Math.round(
-        (scale.notes[index] + octave * scale.notes[scale.notes.length - 1]) *
-        UNITS_PER_SEMITONE / CENTS_PER_SEMITONE
-    );
+    let mapIndex = modulo(offset + 1, keymap.size);
+    const scaleIndex = keymap.mapping[mapIndex];
+    console.log(key, octave, scaleIndex);
+    const units = scaleIndex === null ?
+        MIN_UNITS :
+        C5_UNITS + Math.round(
+            (scale.notes[modulo(scaleIndex - 1, scale.notes.length)] +
+                octave * scale.notes[scale.notes.length - 1]) *
+            UNITS_PER_SEMITONE / CENTS_PER_SEMITONE
+        );
     return Math.max(MIN_UNITS, Math.min(MAX_UNITS, units));
 }

@@ -26,10 +26,12 @@ function parseKbm(text: string): Keymap {
     keymap.referenceNote = parseInt(lines[4]);
     keymap.frequency = parseFloat(lines[5]);
     keymap.formalOctave = parseInt(lines[6]);
-    keymap.mapping = lines.slice(7).map((s) => s == 'x' ? null : parseInt(s));
+    keymap.mapping = lines.slice(7).map((s) =>
+        s.trim() == 'x' ? null : parseInt(s));
     if (keymap.mapping.length != keymap.size) {
         throw new Error('Wrong number of keys in mapping')
     }
+    console.log(keymap);
     return keymap;
 }
 

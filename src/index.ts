@@ -68,9 +68,6 @@ function finish(buf: Uint8Array, filename: string) {
     clearError();
     try {
         const blob = new Blob([buf], { type: 'application/octet-stream' });
-        console.log(buf);
-        console.log(blob);
-        blob.arrayBuffer().then((x) => console.log(x.slice(0, 256)));
         download(blob, filename.replace('.scl', '.curve16bit'));
     } catch (err) {
         reportError(err);
