@@ -17,7 +17,7 @@ function parseNote(line: string): number {
         const num = parseInt(line);
         return centsFromRatio(num, 1);
     } else if (/^\d+\/\d+$/.test(line)) {
-        const tokens = line.split('/').map(parseInt);
+        const tokens = line.split('/').map((x) => parseInt(x));
         return centsFromRatio(tokens[0], tokens[1]);
     } else if (/^\d*.\d*$/.test(line)) {
         return parseFloat(line);
