@@ -39,7 +39,6 @@ function calcPitch(scale: Scale, keymap: Keymap, key: number): number {
     const octave = Math.floor(offset / keymap.size);
     let mapIndex = modulo(offset + 1, keymap.size);
     const scaleIndex = keymap.mapping[mapIndex];
-    console.log(key, octave, scaleIndex);
     const units = scaleIndex === null ?
         MIN_UNITS :
         C5_UNITS + Math.round(

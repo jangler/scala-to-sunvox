@@ -31,7 +31,6 @@ function parseKbm(text: string): Keymap {
     if (keymap.mapping.length != keymap.size) {
         throw new Error('Wrong number of keys in mapping')
     }
-    console.log(keymap);
     return keymap;
 }
 
