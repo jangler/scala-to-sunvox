@@ -8,6 +8,8 @@ const sclInput =
     document.querySelector('#sclInput') as HTMLInputElement;
 const kbmInput =
     document.querySelector('#kbmInput') as HTMLInputElement;
+const centsInput =
+    document.querySelector('#centsInput') as HTMLInputElement;
 const convertButton =
     document.querySelector('#convertButton') as HTMLButtonElement;
 const messageArea =
@@ -40,19 +42,22 @@ function download(blob: Blob, filename: string) {
 convertButton.addEventListener('click', (event) => {
     const scl = sclInput.files?.item(0);
     const kbm = kbmInput.files?.item(0);
-    if (scl) {
+    const offset = centsInput.valueAsNumber;
+    if (isNaN(offset)) {
+        reportError(new Error('Invalid cents offset'));
+    } else if (scl) {
         scl.text().then((sclText) => {
             try {
                 const scale = parseScl(sclText);
                 if (kbm) {
                     kbm.text().then((kbmText) => {
                         const keymap = parseKbm(kbmText);
-                        const buf = generateCurve(scale, keymap);
+                        const buf = generateCurve(scale, keymap, offset);
                         finish(buf, scl.name);
                     })
                 } else {
                     const keymap = defaultMap(scale.notes.length);
-                    const buf = generateCurve(scale, keymap);
+                    const buf = generateCurve(scale, keymap, offset);
                     finish(buf, scl.name);
                 }
             } catch (err) {
