@@ -35,7 +35,7 @@ function parseScl(text: string): Scale {
     const count = parseInt(lines[1]);
     scale.notes = lines.slice(2).filter((s) => s.length > 0).map(parseNote);
     if (scale.notes.length != count) {
-        throw new Error('Wrong number of notes in scale')
+        throw new Error('Wrong number of notes in scale');
     }
     return scale;
 }

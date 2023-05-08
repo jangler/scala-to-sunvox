@@ -47,22 +47,22 @@ convertButton.addEventListener('click', (event) => {
         reportError(new Error('Invalid cents offset'));
     } else if (scl) {
         scl.text().then((sclText) => {
-            try {
-                const scale = parseScl(sclText);
-                if (kbm) {
-                    kbm.text().then((kbmText) => {
-                        const keymap = parseKbm(kbmText);
-                        const buf = generateCurve(scale, keymap, offset);
-                        finish(buf, scl.name);
-                    })
-                } else {
-                    const keymap = defaultMap(scale.notes.length);
+            const scale = parseScl(sclText);
+            if (kbm) {
+                kbm.text().then((kbmText) => {
+                    const keymap = parseKbm(kbmText);
                     const buf = generateCurve(scale, keymap, offset);
                     finish(buf, scl.name);
-                }
-            } catch (err) {
-                reportError(err);
+                }).catch((err) => {
+                    reportError(err);
+                });
+            } else {
+                const keymap = defaultMap(scale.notes.length);
+                const buf = generateCurve(scale, keymap, offset);
+                finish(buf, scl.name);
             }
+        }).catch((err) => {
+            reportError(err);
         });
     } else {
         reportError(new Error('No scale selected'));

@@ -29,7 +29,7 @@ function parseKbm(text: string): Keymap {
     keymap.mapping = lines.slice(7).map((s) =>
         s.trim() == 'x' ? null : parseInt(s));
     if (keymap.mapping.length != keymap.size) {
-        throw new Error('Wrong number of keys in mapping')
+        throw new Error('Wrong number of keys in mapping');
     }
     return keymap;
 }
