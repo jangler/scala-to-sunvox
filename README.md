@@ -1,6 +1,6 @@
 # Scala to Sunvox
 
-<https://jangler.github.io/scala-to-sunvox/>
+Moved to <https://github.com/jangler/tuning>.
 
 Web app that converts a [Scala][1] scale and keyboard map to a [Sunvox][2]
 pitch curve.
